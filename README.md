@@ -81,53 +81,28 @@ Annonymous:
 
 ---
 
-<em><b>Classes</em></b>
+<em>Enums</em>
 
-A class can be defined in any part of a file. They are defined as follows:
+Enums are defined as a set of possible values for a type
 
-```
-asscessibility CLASS ID relation {
+<em>Structs</em>
 
-}
-```
+In this language, structs can hold many different variables inside one variable. They cannot contain other structs, only pointers to them.
 
 <em>Methods</em>
 
-A method is similar to a function, but is declared within the scope of a class. They can be declared as follows:
+A method is similar to a function, but is declared within the scope of a struct or an enum. All variables of the specified struct or enum type has access to that variable. They can be declared as follows:
 
 ```
-accessibility STATIC TYPE ID (parameters){
+TYPEDEF STRUCT ID (parameters){
 
 }
-
-accessibility TYPE ID (parameters){
-
-}
-```
-
-Here, a method can be either a static method or an instance method. In addition, it must have a return type, etiher an existing type or of type void.
-
-<em>Constructor</em>
-
-Constructors are declared as a method within a class. Method overloading is allowed. They can be declared as follows:
-
-```
-accessibility __init__ (parameters){
-
+IMPL ID{
+  methods
 }
 ```
 
----
-
-<em>Fields</em>
-
-Fields are variables that are declared inside a class but outside the scope of any method. They can be declared as follows:
-
-```
-accessibility STATIC type ID;
-
-accessibility type ID;
-```
+Here, we assume that a struct has been defined. We used the implement keyword to associate certain methods with the struct. These methods are visible to all variables of that specific struct type.
 
 <em><b>Built In Classes</em></b>
 

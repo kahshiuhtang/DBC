@@ -29,9 +29,9 @@
 #define SWITCH 29
 #define CASE 30
 #define FUNC 31
-#define PUBL 32
-#define PRIV 33
-#define PROT 34
+#define IMPL 32
+#define ARR 33
+#define DOT 34
 #define STATIC 35
 #define VAR 36
 #define CONST 37
