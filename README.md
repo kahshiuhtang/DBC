@@ -10,6 +10,8 @@ It is based on .dbl files, are written in a language defined by the rules below
 
 ## Design
 
+The language used in the .dbl files are based on queries in MySQL and the language Rust.
+
 The DBC program will take one file as input. This file must be of the type .dbl.
 
 ```
@@ -30,6 +32,18 @@ However, if any queries are discovered, the program will instead compile down to
 
 ## Language Design
 
+<em><b>Variable Declaration</b></em>
+
+Variables can be declared with a type or the VAR type, speicfying that the type of the variable is unknown. Variables can be declared with the following grammar rules:
+
+```
+var_decl;
+
+undecl_var_decl;
+```
+
+Much of the design for variables was inspired by the Rust Programming Language. A variable can have one owner and once out of scope, it is treated as garbage and terminated. The owner of a variable is the scope the variable was declared in. In order to pass the variables to a different scope,
+
 <em><b>Primitives Types</em></b>
 
 ```
@@ -42,42 +56,96 @@ double: 8 bytes
   void: 1 byte
 ```
 
-By default, primitive types are stored on the program's stack.
-
 <em><b>Pointer Types</em></b>
 
-Every type has an associated pointer type. An asteriks follows the type declaration to signal a pointer type.
+Every type has an associated pointer type. An asterisks follows the type declaration to signal a pointer type. The grammar rule is:
 
 ```
-int*
+pointer: type STAR;
+
+STAR: *
+```
+
+To get the address of a variable, use the ampersand key before the variable name.
+
+```
+address: AMPERSAND
 ```
 
 ---
 
 <em><b>Statements</em></b>
-Variable Declaration:
-
-Function Declaration:
-
 Operations:
 
-If Statement
+The following mathematical operations are supported in .dbl files. They are as follows:
+
+```
+     ADD: +
+SUBTRACT: -
+MULTIPLY: *
+  DIVIDE: /
+ MODULUS: %
+
+  LEFT SHIFT: <<
+ RIGHT SHIFT: >>
+
+  NEGATE: -
+```
+
+The following logical operations are supported in .dbl files. They are as follows:
+
+```
+AND: &&
+OR: ||
+NOT: !
+
+EQUALS: ==
+NOT EQUALS: !=
+```
+
+If Statement grammar rule:
+
+```
+IF(condition){
+
+}IF_EXTEND
+
+IF_EXTEND: ELIF(CONDITION){} IF_EXTEND
+         | ELSE{}
+         |
+```
 
 For Statement
 
 While Statement
 
+```
+while(condition){
+
+}
+```
+
 ---
 
 <em><b>Functions</em></b>
 
-A function is a block of code defined not directly belonging to a class. They can be defined inside a method of a class. There are multiple ways to define a function, as listed below.
+A function is a block of code defined not directly belonging to a specific struct. Functions can be defined to stand alone or they can be assigned to a variable.
 
 Normal Declaration:
 
-Variable Assignment:
+```
+fn(paramaters){
 
-Annonymous:
+}
+```
+
+Anonymous Declaration:
+
+```
+(parameters){
+
+}
+```
 
 ---
 
@@ -85,24 +153,58 @@ Annonymous:
 
 Enums are defined as a set of possible values for a type
 
+```
+ENUM ID{
+  enum_var
+}
+enum_var_list: enum_var, enum_var_list
+             | enum_var
+enum_var: ID(type)
+        | ID
+```
+
+To use the value VALUE1 of an enum with the name of ID1:
+
+```
+enum_access: ID1::VALUE1;
+```
+
 <em>Structs</em>
 
-In this language, structs can hold many different variables inside one variable. They cannot contain other structs, only pointers to them.
+In this language, structs can hold many different variables inside one variable. They cannot contain other structs, only pointers to them. A struct can be declared as follows:
+
+```
+STRUCT ID{
+  _var_decl
+}
+```
 
 <em>Methods</em>
 
 A method is similar to a function, but is declared within the scope of a struct or an enum. All variables of the specified struct or enum type has access to that variable. They can be declared as follows:
 
 ```
-TYPEDEF STRUCT ID (parameters){
-
-}
-IMPL ID{
+FUNCS ID{
   methods
 }
 ```
 
 Here, we assume that a struct has been defined. We used the implement keyword to associate certain methods with the struct. These methods are visible to all variables of that specific struct type.
+
+<em>Inheritance</em>
+
+Structs can inherit methods and variables associated with different structs. This is done with the EXT keyword.
+
+```
+STRUCT ID EXT ID{
+
+}
+FUNCS ID EXT ID{
+
+}
+```
+
+Both the struct and it's functions must extend the same struct type. A struct type must only extend one other struct
 
 <em><b>Built In Classes</em></b>
 
@@ -163,5 +265,12 @@ array_decl: type array;
 
 array: []
      | [] array
+
+var_decl: _var_decl
+        | _var_decl, var_decl
+_var_decl: type ID
+
+undecl_var_decl: VAR ID;
+
 
 ```

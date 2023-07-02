@@ -5,6 +5,8 @@
 %%
 ;               return SCOLON;
 "int"           return INT;
+"bool"          return BOOL;
+"char"          return CHAR;
 
 
 %%
