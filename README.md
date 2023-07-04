@@ -80,16 +80,26 @@ Operations:
 The following mathematical operations are supported in .dbl files. They are as follows:
 
 ```
-     ADD: +
-SUBTRACT: -
-MULTIPLY: *
-  DIVIDE: /
- MODULUS: %
+                     ADD: +
+                SUBTRACT: -
+                MULTIPLY: *
+                  DIVIDE: /
+                 MODULUS: %
 
-  LEFT SHIFT: <<
- RIGHT SHIFT: >>
+              LEFT SHIFT: <<
+            RIGHT SHIFT: >>
+             BITWISE OR: |
+           BITWISE AND : &
+                    XOR: ^
+            BITWISE NOT: ~
 
-  NEGATE: -
+
+          GREATER THAN : >
+             LESS THAN : <
+ GREATER THAN OR EQUAL : >=
+    LESS THAN OR EQUAL : <=
+
+                 NEGATE: -
 ```
 
 The following logical operations are supported in .dbl files. They are as follows:
@@ -103,7 +113,7 @@ EQUALS: ==
 NOT EQUALS: !=
 ```
 
-If Statement grammar rule:
+If Statement:
 
 ```
 IF(condition){
@@ -116,6 +126,12 @@ IF_EXTEND: ELIF(CONDITION){} IF_EXTEND
 ```
 
 For Statement
+
+```
+for(expression;condition;expression){
+
+}
+```
 
 While Statement
 
@@ -179,6 +195,14 @@ STRUCT ID{
 }
 ```
 
+To access any variables or methods belonging to a struct, use the dot operator
+
+```
+variable1.value1;
+
+variable1.function1();
+```
+
 <em>Methods</em>
 
 A method is similar to a function, but is declared within the scope of a struct or an enum. All variables of the specified struct or enum type has access to that variable. They can be declared as follows:
@@ -206,11 +230,45 @@ FUNCS ID EXT ID{
 
 Both the struct and it's functions must extend the same struct type. A struct type must only extend one other struct
 
+An IMPL structure is a promise to implement certain functions. The functions inside an IMPL structure are declared but not defined.
+
+```
+IMPL ID{
+  functions
+}
+
+functions : fn ID(parameters), functions
+          | fn ID(parameters);
+
+```
+
+<em><b>MySQL</b></em>
+
+All keywords in MySQL are recognized by the compiler. SQL keywords are put into a SQL block and separated by a semicolon. They can be assigned to a variable or let to run immediately.
+
+```
+SQL{
+  sql_code;
+}
+
+var:sql code = SQL{
+  sql_code;
+}
+```
+
+<em><b>Importing</em></b>
+
+To use variables defined in another .dbl file, use the USE keyword to import it. All imports must be defined before any other statements and expressions
+
+```
+use ID1;
+use ID2;
+```
+
 <em><b>Built In Classes</em></b>
 
 ```
 JSON
-Query
 Table
 Date
 Array
@@ -268,7 +326,7 @@ array: []
 
 var_decl: _var_decl
         | _var_decl, var_decl
-_var_decl: type ID
+_var_decl: VAR:type ID
 
 undecl_var_decl: VAR ID;
 

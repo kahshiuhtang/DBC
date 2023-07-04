@@ -10,7 +10,6 @@
 #define LBRACK 10
 #define RBRACK 11
 #define ID 12
-#define TYPE 13
 #define PLUS 14
 #define MINUS 15
 #define MULT 16
@@ -26,9 +25,7 @@
 #define IF 26
 #define ELSE 27
 #define ELIF 28
-#define SWITCH 29
-#define CASE 30
-#define FUNC 31
+#define FUNCS 31
 #define IMPL 32
 #define ARR 33
 #define DOT 34
@@ -40,21 +37,15 @@
 #define THROWS 40
 #define TRY 41
 #define CATCH 42
-#define UNION 43
 #define STRUCT 44
-#define NAMESPACE 45
-#define IMPORT 46
-#define EXPORT 47
+#define USE 46
 #define ENUM 48
 #define SIGNED 48
 #define UNSIGNED 50
 #define NULL 51
-#define SUPER 52
-#define THIS 53
 #define RETURN 54
-#define SYNC 55
 
-#define ADD 56
+#define SADD 56
 #define CONSTRAINT 57
 #define ALL 58
 #define ALT 59
@@ -92,7 +83,7 @@
 #define LIMIT 91
 #define OR 92
 #define ORDERBY 93
-#define PRIMRARY 94
+#define PRIMARY 94
 #define SELECT 95
 #define SET 96
 #define UNION 97
@@ -101,3 +92,18 @@
 
 #define TRUE 100
 #define FALSE 101
+#define SQL 102
+#define AMPERSAND 103
+#define BOR 104
+#define BAND 105
+#define XOR 106
+#define BNOT 107
+#define GT 108
+#define LT 109
+#define GTE 110
+#define LTE 111
+#define NEGATE 112
+#define COLON 113
+#define DCOLON 114
+#define EXT 115
+#define FN 116
