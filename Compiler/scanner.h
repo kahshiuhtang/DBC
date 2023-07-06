@@ -33,10 +33,6 @@
 #define VAR 36
 #define CONST 37
 #define ARRAY 38
-#define THROW 39
-#define THROWS 40
-#define TRY 41
-#define CATCH 42
 #define STRUCT 44
 #define USE 46
 #define ENUM 48
@@ -51,7 +47,7 @@
 #define ALT 59
 #define COLUMN 60
 #define TABLE 61
-#define AND 62
+#define SAND 62
 #define ANY 63
 #define AS 64
 #define ASC 65
@@ -77,11 +73,11 @@
 #define IN 85
 #define INSERTINTO 86
 #define IS 87
-#define NULL 88
+#define SNULL 88
 #define LEFT 89
 #define RIGHT 90
 #define LIMIT 91
-#define OR 92
+#define SOR 92
 #define ORDERBY 93
 #define PRIMARY 94
 #define SELECT 95
@@ -107,3 +103,4 @@
 #define DCOLON 114
 #define EXT 115
 #define FN 116
+#define ASSIGN 117

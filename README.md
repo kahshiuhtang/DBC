@@ -127,6 +127,8 @@ IF_EXTEND: ELIF(CONDITION){} IF_EXTEND
 
 For Statement
 
+The first expression rule only consists of the declaration of variables. The condition can be any expression that evaluates to true or false. The last expression is any expression that does not declare
+
 ```
 for(expression;condition;expression){
 
