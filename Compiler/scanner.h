@@ -104,3 +104,4 @@
 #define EXT 115
 #define FN 116
 #define ASSIGN 117
+#define EQUALS 118
